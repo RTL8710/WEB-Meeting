@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="simplepeer.min.js"></script>
+    <script src="https://imgcache.qq.com/qcloud/tcbjs/1.10.8/tcb.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <script src="troom.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div id="video_model" style="display: none;" onclick="Room.changeview()">
+        <video id="you" x5-video-player-type="h5"></video>
+        <video id="me" x5-video-player-type="h5"></video>
+    </div>
+    <div id="tool_model" style="display: none;">
+        <block>
+            <button id="create" onclick="Room.create_bind()">创建房间</button>
+        <button id="close" onclick="if(confirm('是否退出并销毁房间？')){Room.exit_bind()}" style="display: none;">结束房间</button>
+            <input id="number" type="number" />
+            <button id="join" onclick="Room.join_bind()">加入房间</button>
+        <button id="quit" onclick="if(confirm('是否断开通信？')){Room.quit_bind()}" style="display: none;">断开通信</button>
+        </block>
+    </div>
+    <div id="novedio">应用正在初始化</div>
+    <script>
+      CloudBase.envId = 'tcb-11f17d'
+      CloudBase.init(function () {
+        Troom.callFunction = CloudBase.callFunction
+        Room.init(Troom)
+        Troom.init()
+      })
+      CloudBase.showmodel = showModel
+      Room.showmodel = showModel
+      function showModel(text,type){
+        if(text != null && text != '')
+          alert(text)
+      }
+    </script>
+</body>
+</html>
